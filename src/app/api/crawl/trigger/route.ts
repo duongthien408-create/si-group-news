@@ -1,8 +1,16 @@
 // API endpoint to trigger news crawling
 // Can be called by n8n webhook or manually
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import { CrawlerService } from "@/lib/crawler/crawler-service";
-import { createClient } from "@/lib/supabase/server";
+
+// Admin client with service role key (bypasses RLS)
+function getAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 export async function POST(request: NextRequest) {
   // Simple auth check - in production use proper auth
@@ -20,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     // Handle cleanup action - delete Untitled articles
     if (action === "cleanup") {
-      const supabase = await createClient();
+      const supabase = getAdminClient();
       const { data, error } = await supabase
         .from("articles")
         .delete()
