@@ -2,6 +2,7 @@
 // Can be called by n8n webhook or manually
 import { NextRequest, NextResponse } from "next/server";
 import { CrawlerService } from "@/lib/crawler/crawler-service";
+import { createClient } from "@/lib/supabase/server";
 
 export async function POST(request: NextRequest) {
   // Simple auth check - in production use proper auth
@@ -15,6 +16,27 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));
     const sourceId = body.sourceId as string | undefined;
+    const action = body.action as string | undefined;
+
+    // Handle cleanup action - delete Untitled articles
+    if (action === "cleanup") {
+      const supabase = await createClient();
+      const { data, error } = await supabase
+        .from("articles")
+        .delete()
+        .eq("title", "Untitled")
+        .select("id");
+
+      if (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+
+      return NextResponse.json({
+        action: "cleanup",
+        deleted: data?.length || 0,
+        message: `Deleted ${data?.length || 0} articles with "Untitled" title`,
+      });
+    }
 
     const crawler = new CrawlerService();
 
