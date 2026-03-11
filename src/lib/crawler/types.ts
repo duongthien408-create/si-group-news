@@ -26,6 +26,7 @@ export interface SourceConfig {
   };
   rssUrl?: string;
   maxArticles?: number;
+  fetchOgImage?: boolean; // Fetch og:image from article page if RSS has no image
 }
 
 export interface CrawlResult {
