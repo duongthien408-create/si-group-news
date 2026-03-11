@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* SI Group Brand Colors */
+@theme {
+  --color-primary-brown: #934d26;
+  --color-primary-gold: #f1d1a9;
+  --color-secondary-green: #00773e;
+  --color-dark: #2d2d2d;
+  --color-charcoal: #444444;
+  --color-footer: #16171d;
+  --color-light-gray: #f2f3f7;
+
+  --font-family-sans: "Futura", "system-ui", "sans-serif";
+  --font-family-serif: "Georgia", "serif";
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-family-sans);
+  color: var(--color-dark);
+  background-color: white;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-serif);
+  color: var(--color-dark);
+}
+
+/* Links */
+a {
+  color: var(--color-primary-brown);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-secondary-green);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-charcoal);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-brown);
+}

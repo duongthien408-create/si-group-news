@@ -1,0 +1,47 @@
+{
+  "name": "si-news-hub",
+  "version": "1.0.0",
+  "description": "Immigration news aggregator for SI Group",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "immigration",
+    "news",
+    "si-group",
+    "supabase",
+    "nextjs"
+  ],
+  "author": "SI Group",
+  "license": "ISC",
+  "packageManager": "pnpm@10.28.1",
+  "dependencies": {
+    "@supabase/ssr": "^0.9.0",
+    "@supabase/supabase-js": "^2.99.0",
+    "axios": "^1.13.6",
+    "cheerio": "^1.2.0",
+    "date-fns": "^4.1.0",
+    "next": "^16.1.6",
+    "p-limit": "^7.3.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/cheerio": "^1.0.0",
+    "@types/node": "^25.4.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.0.3",
+    "eslint-config-next": "^16.1.6",
+    "postcss": "^8.5.8",
+    "supabase": "^2.78.1",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3"
+  }
+}
