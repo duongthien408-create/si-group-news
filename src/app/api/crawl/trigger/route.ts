@@ -46,6 +46,26 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Handle cleanup-no-images action - delete articles without images
+    if (action === "cleanup-no-images") {
+      const supabase = getAdminClient();
+      const { data, error } = await supabase
+        .from("articles")
+        .delete()
+        .is("image_url", null)
+        .select("id");
+
+      if (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+
+      return NextResponse.json({
+        action: "cleanup-no-images",
+        deleted: data?.length || 0,
+        message: `Deleted ${data?.length || 0} articles without images`,
+      });
+    }
+
     const crawler = new CrawlerService();
 
     if (sourceId) {
